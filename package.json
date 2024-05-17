@@ -1,0 +1,67 @@
+{
+  "name": "RISK-MANAGEMENT",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.15.0",
+    "@sap-cloud-sdk/resilience": "^3.15.0",
+    "@sap/cds": "^7",
+    "express": "^4",
+    "@sap/cds-hana": "^2",
+    "@sap/xssec": "^3"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/ux-specification": "^1.120.10"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-risk-management": "cds watch --open risk-management/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/risk-management"
+  ],
+  "cds": {
+    "requires": {
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "credentials": {
+          "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+        }
+      },
+      "[production]": {
+        "db": "hana",
+        "auth": {
+          "kind": "basic-auth",
+          "users": {
+            "risk.viewer@tester.sap.com": {
+              "password": "initial",
+              "ID": "riskviewer",
+              "userAttributes": {
+                "email": "risk.viewer@tester.sap.com"
+              },
+              "roles": [
+                "RiskViewer"
+              ]
+            },
+            "risk.manager@tester.sap.com": {
+              "password": "initial",
+              "ID": "riskmanager",
+              "userAttributes": {
+                "email": "risk.manager@tester.sap.com"
+              },
+              "roles": [
+                "RiskManager"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
