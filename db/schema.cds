@@ -19,7 +19,7 @@ entity Risks : cuid, managed {
     virtual criticality     : Integer;
     virtual PrioCriticality : Integer;
 }
-
+    
 entity Mitigations : cuid, managed {
     descr    : String;
     owner    : String;

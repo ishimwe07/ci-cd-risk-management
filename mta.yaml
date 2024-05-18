@@ -25,8 +25,24 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
+      - name: RISK-MANAGEMENT-auth
       - name: RISK-MANAGEMENT-destination
       - name: RISK-MANAGEMENT-db
+
+  - name: RISK-MANAGEMENT
+    type: approuter.nodejs
+    path: app\router
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
       - name: RISK-MANAGEMENT-auth
 
   - name: RISK-MANAGEMENT-db-deployer
@@ -36,22 +52,6 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: RISK-MANAGEMENT-db
-
-  # - name: RISK-MANAGEMENT
-  #   type: approuter.nodejs
-  #   path: app\router
-  #   parameters:
-  #     keep-existing-routes: true
-  #     disk-quota: 256M
-  #     memory: 256M
-  #   requires:
-  #     - name: srv-api
-  #       group: destinations
-  #       properties:
-  #         name: srv-api # must be used in xs-app.json as well
-  #         url: ~{srv-url}
-  #         forwardAuthToken: true
-  #     - name: RISK-MANAGEMENT-auth
 
 resources:
   - name: RISK-MANAGEMENT-destination
