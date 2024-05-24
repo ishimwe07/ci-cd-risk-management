@@ -31,7 +31,7 @@ modules:
 
   - name: RISK-MANAGEMENT
     type: approuter.nodejs
-    path: app\router
+    path: app/router
     parameters:
       keep-existing-routes: true
       disk-quota: 256M
