@@ -5,7 +5,6 @@ module.exports = async (srv) => {
 
   srv.after("READ", Risks, (data) => {
     const risks = Array.isArray(data) ? data : [data];
-
     risks.forEach((risk) => {
       if (risk.impact >= 100000) {
         risk.criticality = 1;
