@@ -81,6 +81,7 @@ module.exports = async (srv) => {
     for (const note of risksArray) {
       note.bp = bpMap[note.bp_BusinessPartner];
     }
+    
     return risks;
   });
 };
