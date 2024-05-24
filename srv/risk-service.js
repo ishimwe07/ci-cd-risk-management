@@ -61,7 +61,6 @@ module.exports = async (srv) => {
     }
 
     const risks = await next();
-
     const risksArray = Array.isArray(risks) ? risks : [risks];
 
     const bpIDs = risksArray.map((risk) => risk.bp_BusinessPartner);
@@ -82,7 +81,6 @@ module.exports = async (srv) => {
     for (const note of risksArray) {
       note.bp = bpMap[note.bp_BusinessPartner];
     }
-
     return risks;
   });
 };
